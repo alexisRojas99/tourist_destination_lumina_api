@@ -52,9 +52,11 @@ export class DestinationsService {
     return destination;
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<{ message: string }> {
     const destination = await this.findOne(id);
 
     await destination.update({ isDeleted: true });
+
+    return { message: 'Destination deleted successfully' };
   }
 }
