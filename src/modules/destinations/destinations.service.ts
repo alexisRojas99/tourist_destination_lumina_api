@@ -24,9 +24,11 @@ export class DestinationsService {
   }
 
   async findAll(): Promise<Destination[]> {
-    return (await this.destinationModel.findAll({
+    const destinations = await this.destinationModel.findAll({
       where: { isDeleted: false },
-    })) as Destination[];
+    });
+
+    return destinations;
   }
 
   async findOne(id: number): Promise<Destination> {
