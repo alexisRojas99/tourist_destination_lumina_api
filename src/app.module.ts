@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { SequelizeModule } from '@nestjs/sequelize';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HealthModule } from './modules/health/health.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { DestinationsModule } from './modules/destinations/destinations.module';
 import appConfig from './config/app.config';
+import { getDatabaseConfig } from './config/database.config';
 
 @Module({
   imports: [
@@ -13,6 +15,11 @@ import appConfig from './config/app.config';
       isGlobal: true,
       load: [appConfig],
       envFilePath: '.env',
+    }),
+    SequelizeModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: getDatabaseConfig,
     }),
     HealthModule,
     DestinationsModule,

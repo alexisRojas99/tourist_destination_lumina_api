@@ -31,8 +31,7 @@ async function bootstrap() {
     .setTitle(appConfig.name)
     .setDescription('A modular NestJS API with comprehensive features')
     .setVersion(appConfig.version)
-    .addTag('Users', 'User management operations')
-    .addTag('Products', 'Product management operations')
+    .addTag('Destinations', 'Destination management operations')
     .addTag('Health', 'Health check operations')
     .build();
 
