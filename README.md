@@ -1,98 +1,240 @@
+# Tourist Destination Lumina API
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A comprehensive REST API for managing tourist destinations in El Salvador, built with NestJS, TypeScript, and PostgreSQL.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Features
 
-## Description
+- **RESTful API** with comprehensive CRUD operations for destinations
+- **Swagger Documentation** with examples and response schemas
+- **PostgreSQL Database** with Sequelize ORM
+- **Docker Support** for easy deployment and development
+- **Health Checks** for monitoring application status
+- **Input Validation** with class-validator
+- **TypeScript** for type safety and better development experience
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📋 Prerequisites
 
-## Project setup
+- Node.js 18+
+- Docker and Docker Compose
+- PostgreSQL (if running without Docker)
 
-```bash
-$ npm install
-```
+## 🛠️ Project Setup
 
-## Compile and run the project
+### Option 1: Using Docker (Recommended)
 
-```bash
-# development
-$ npm run start
+1. **Clone the repository**
 
-# watch mode
-$ npm run start:dev
+   ```bash
+   git clone https://github.com/alexisRojas99/tourist_destination_lumina_api.git
+   cd tourist_destination_lumina_api
+   ```
 
-# production mode
-$ npm run start:prod
-```
+2. **Start the database**
 
-## Run tests
+   ```bash
+   npm run docker:database:up
+   ```
+
+3. **Build and start the web service**
+
+   ```bash
+   npm run docker:build
+   ```
+
+   Or just start (if already built):
+
+   ```bash
+   npm run docker:up
+   ```
+
+### Option 2: Local Development
+
+1. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+2. **Configure environment variables**
+
+   ```bash
+   cp .env.example .env
+   # Edit .env with your database configuration
+   ```
+
+3. **Start PostgreSQL database**
+
+   ```bash
+   npm run docker:database:up
+   ```
+
+4. **Run the application**4. **Run the application**
+
+   ```bash
+   # development mode
+   npm run start:dev
+
+   # production mode
+   npm run start:prod
+   ```
+
+## 🐳 Docker Commands
+
+| Command                      | Description                              |
+| ---------------------------- | ---------------------------------------- |
+| `npm run docker:database:up` | Start PostgreSQL database in Docker      |
+| `npm run docker:build`       | Build and start the web service          |
+| `npm run docker:up`          | Start the web service (if already built) |
+
+## 📖 API Documentation
+
+Once the application is running, you can access:
+
+- **API Base URL**: `http://localhost:8000/api/v1`
+- **Swagger Documentation**: `http://localhost:8000/api/v1/docs`
+- **Health Check**: `http://localhost:8000/api/v1/health`
+
+## 🏗️ API Endpoints
+
+### Destinations
+
+- `GET /api/v1/destinations` - Get all destinations
+- `GET /api/v1/destinations/:id` - Get destination by ID
+- `POST /api/v1/destinations` - Create new destination
+- `PATCH /api/v1/destinations/:id` - Update destination
+- `DELETE /api/v1/destinations/:id` - Soft delete destination
+
+### Health
+
+- `GET /api/v1/health` - Application health check
+
+## 🧪 Testing
+
+## 🧪 Testing
 
 ```bash
 # unit tests
-$ npm run test
+npm run test
+
+# watch mode
+npm run test:watch
 
 # e2e tests
-$ npm run test:e2e
+npm run test:e2e
 
 # test coverage
-$ npm run test:cov
+npm run test:cov
 ```
 
-## Deployment
+## 🗄️ Database Management
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Migrations
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Generate migration
+npm run migration:generate -- migration-name
+
+# Run migrations
+npm run migration:run
+
+# Revert last migration
+npm run migration:revert
+
+# Revert all migrations
+npm run migration:revert-all
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Seeds
 
-## Resources
+```bash
+# Generate seed
+npm run seed:generate -- seed-name
 
-Check out a few resources that may come in handy when working with NestJS:
+# Run all seeds
+npm run seed:run
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Revert all seeds
+npm run seed:revert
+```
 
-## Support
+## 🔧 Environment Variables
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Create a `.env` file in the root directory with the following variables:
 
-## Stay in touch
+```env
+# Application
+NODE_ENV=development
+PORT=8000
+API_PREFIX=api/v1
+APP_NAME=Tourist Destination Lumina API
+APP_VERSION=1.0.0
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_MOTOR=postgres
+DB_NAME=el_salvador_dev
+DB_USERNAME=develop
+DB_PASSWORD=dev$123
+```
 
-## License
+## 📁 Project Structure
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```
+src/
+├── common/              # Shared utilities and DTOs
+│   ├── dto/            # Data Transfer Objects
+│   ├── filters/        # Exception filters
+│   └── interceptors/   # Request/Response interceptors
+├── config/             # Configuration files
+├── modules/            # Feature modules
+│   ├── destinations/   # Destinations module
+│   ├── health/        # Health check module
+│   └── users/         # Users module (if applicable)
+└── main.ts            # Application entry point
+```
+
+## 🚀 Deployment
+
+### Using Docker
+
+1. **Build the production image**
+
+   ```bash
+   docker build -t tourist-destination-api .
+   ```
+
+2. **Run with Docker Compose**
+   ```bash
+   docker-compose up -d
+   ```
+
+## 🛠️ Development Tools
+
+- **ESLint**: Code linting and formatting
+- **Prettier**: Code formatting
+- **Jest**: Testing framework
+- **TypeScript**: Type checking
+- **Swagger**: API documentation
+
+## 📝 License
+
+This project is [MIT licensed](LICENSE).
+
+## 👨‍💻 Author
+
+**Alexis Rojas**
+
+- GitHub: [@alexisRojas99](https://github.com/alexisRojas99)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
