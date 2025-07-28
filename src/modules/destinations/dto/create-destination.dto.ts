@@ -37,13 +37,13 @@ export class CreateDestinationDto {
     description: 'A detailed description of the destination',
     example:
       'Beautiful hotel located in the mountains with stunning views and excellent service. Perfect for couples and families looking for a peaceful retreat.',
-    minLength: 10,
+    minLength: 2,
     maxLength: 1000,
     type: String,
   })
   @IsString()
   @IsNotEmpty()
-  @MinLength(10)
+  @MinLength(2)
   @MaxLength(1000)
   description: string;
 
